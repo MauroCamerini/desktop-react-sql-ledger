@@ -1,6 +1,6 @@
 import cache from "./cache"
 import db from "./db/db";
-import tables from "../common/tables";
+import tables from "./tables";
 import response from "./response";
 import triggers from "./triggers";
 

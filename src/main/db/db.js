@@ -3,7 +3,7 @@ import DATABASE_QUERY from './queries/database.sql'
 import DEFAULTDATA_QUERY from './queries/defaultdata.sql'
 import config from "../config";
 import { getNowFull } from "../../common/dateformat";
-import tables from "../../common/tables";
+import tables from "../tables";
 
 /**
  * Current BetterSqlite3.Database instance

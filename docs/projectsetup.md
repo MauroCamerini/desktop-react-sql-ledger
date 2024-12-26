@@ -1,5 +1,5 @@
-# Create APP
-This document explains step by step how the project was configured from scratch at the start.
+# Project setup
+This document explains step by step how the project was configured from scratch at the start. This is for educational porpouse only, for actually installing the project read [Installation](../readme.md#getting-started)
 
 ## 1. Create an Electron app with Webpack
 Run the following command to create a new Electron app using the Webpack template:

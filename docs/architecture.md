@@ -40,4 +40,4 @@ The database is stored in `/database.db` and managed with `better-sqlite3`. It e
 
 These measures ensure robust and consistent data handling within the application.
 
-#### [Databse full description](databse.md)
+#### [Database full description](database.md)

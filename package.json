@@ -1,0 +1,53 @@
+{
+  "name": "desktop-react-sql-ledger",
+  "productName": "desktop-react-sql-ledger",
+  "version": "1.0.0",
+  "description": "Portable desktop ledger applicaction built with Electron, React and SQLite",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@electron-forge/cli": "^7.6.0",
+    "@electron-forge/maker-deb": "^7.6.0",
+    "@electron-forge/maker-rpm": "^7.6.0",
+    "@electron-forge/maker-squirrel": "^7.6.0",
+    "@electron-forge/maker-zip": "^7.6.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
+    "@electron-forge/plugin-fuses": "^7.6.0",
+    "@electron-forge/plugin-webpack": "^7.6.0",
+    "@electron/fuses": "^1.8.0",
+    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^6.11.0",
+    "electron": "33.2.1",
+    "node-loader": "^2.1.0",
+    "raw-loader": "^4.0.2",
+    "style-loader": "^3.3.4"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Mauro Camerini",
+    "email": "maurocamerini90@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
+    "better-sqlite3": "^11.7.0",
+    "bootstrap": "^5.3.3",
+    "electron-squirrel-startup": "^1.0.1",
+    "react": "^19.0.0",
+    "react-bootstrap": "^2.10.7",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.1",
+    "react-router": "^7.0.2",
+    "react-select": "^5.9.0",
+    "yup": "^1.6.1"
+  }
+}

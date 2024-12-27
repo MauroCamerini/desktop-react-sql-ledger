@@ -102,7 +102,7 @@ SELECT
 FROM entries e 
 INNER JOIN tags t ON t.id = e.tag_id
 INNER JOIN wallets w ON w.id = e.wallet_id
-INNER JOIN contacts c ON c.id = e.contact_id;
+LEFT  JOIN contacts c ON c.id = e.contact_id; -- contact_id can be NULL
 
 CREATE VIEW "income_statement" (
 	period,

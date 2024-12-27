@@ -4,10 +4,10 @@ import Table from 'react-bootstrap/Table'
 import Container from 'react-bootstrap/Container'
 import RowControls from './RowControls'
 
-export default function ViewTable({data, columns, controls, onDeleteClick, onUpdateClick, keyField}) {
+export default function DataTable({data, columns, controls, onDeleteClick, onUpdateClick, keyField}) {
   return (
     <Container>
-    <Table>
+    <Table striped size="sm">
       <thead>
         <tr>
           {columns.map(({field, header}) => <th key={field}>{header}</th>)}

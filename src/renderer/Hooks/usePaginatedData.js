@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useData } from '../Hooks/useData'
-import { useRowCount } from "../Hooks/useRowCount";
-import ViewTable from "./ViewTable";
-import Pagination from "./DataPagination";
+import React, { useEffect, useState } from 'react'
+import { useData } from './useData'
+import { useRowCount } from './useRowCount'
 
-export default function ViewData({tableName, filters, rowsPerPage = 10, ...rest}) {
+export const usePaginatedData = (tableName, rowsPerPage = 10) => {
+
+  const [filters, setFilters] = useState({})
 
   const [options, setOptions] = useState({filters, limit: rowsPerPage, offset: 0})
-
   const {totalRows, error: totalRowsError} = useRowCount(tableName, options.filters, true)
 
   const {loading, data, error: dataError} = useData(tableName, options, true)
 
   const [currentPage, setCurrentPage] = useState(1)
+
 
   useEffect(()=> {
     setOptions(prev => {
@@ -33,12 +33,21 @@ export default function ViewData({tableName, filters, rowsPerPage = 10, ...rest}
     setOptions(prev => ({...prev, filters}))
   }, [filters])
 
-  return (<>
-    { data && totalRows > 0 &&
-    <>
-      <ViewTable data={data} { ...rest} />
-      <Pagination currentPage={currentPage} rowsPerPage={rowsPerPage} totalRows={totalRows} onPageChange={(page) => setCurrentPage(page)} />
-    </>
+  const onPageChange = (newPage) => setCurrentPage(newPage)
+
+  const onFiltersChange = (newFilters) => setFilters(newFilters)
+
+  return {
+    onFiltersChange,
+    loading,
+    data,
+    error: dataError,
+    pagination: {
+      error: totalRowsError,
+      currentPage,
+      rowsPerPage,
+      totalRows,
+      onPageChange
     }
-  </>)
+  }
 }

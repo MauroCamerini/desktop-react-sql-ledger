@@ -8,4 +8,8 @@ module.exports = {
   module: {
     rules: require('./webpack.rules'),
   },
+  externals: {
+    'better-sqlite3': 'commonjs better-sqlite3',
+  },
+
 };

@@ -212,10 +212,12 @@ function readRecords(tableName, options) {
   const limitClause = options?.limit ? `LIMIT ${options.limit}` : "";
   const offsetClause = options?.offset ? `OFFSET ${options.offset}` : "";
   const whereClause = generateWhereClause(options?.filters || {});
+  const orderByClause = options?.order ? `ORDER BY ${options.order.by} ${options.order.asc ? 'ASC' : 'DESC'}` : "";
 
   const stmt = _db.prepare(`
     SELECT * FROM ${tableName}
     ${whereClause.clause}
+    ${orderByClause}
     ${limitClause}
     ${offsetClause}
   `);

@@ -12,7 +12,8 @@ const options = {
   filters: {
     creation_time: { greater_than_e: getNowYYYYMMDD()} 
   },
-  limit: 10, offset: 0
+  order: { by: 'creation_time'},
+  limit: 50, offset: 0
 }
 
 export default function Edit() {

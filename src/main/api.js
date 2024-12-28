@@ -30,8 +30,8 @@ const checkTableName = (tableName) => {
 }
 
 const checkOptions = (options) => {
-  if(!!(Object.hasOwn(options, 'limit') ^ Object.hasOwn(options, 'offset'))) {
-    throw new Error("'limit' and 'offset' are codependent and one is missing");
+  if(Object.hasOwn(options, 'offset') && !Object.hasOwn(options, 'limit')) {
+    throw new Error("'offset' set but no 'limit'");
   }
   if(Object.hasOwn(options, 'limit') && !Number.isInteger(options.limit)) {
     throw new TypeError("'limit' must be integer");
@@ -39,7 +39,10 @@ const checkOptions = (options) => {
   if(Object.hasOwn(options, 'offset') && !Number.isInteger(options.offset)) {
     throw new TypeError("'offset' must be integer");
   }
-
+  
+  if(Object.hasOwn(options, 'order') && !Object.hasOwn(options.order, 'by')) {
+    throw new Error("Field not specified with 'by' in 'order'");
+  }
 
 }
 

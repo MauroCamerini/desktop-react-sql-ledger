@@ -98,7 +98,10 @@ SELECT
 	contact_id,
 	c.name AS contact_name,
 	wallet_id,
-	w.name AS wallet_name
+	w.name AS wallet_name,
+	"creation_time",
+  "modification_time",
+	"session_uuid"
 FROM entries e 
 INNER JOIN tags t ON t.id = e.tag_id
 INNER JOIN wallets w ON w.id = e.wallet_id

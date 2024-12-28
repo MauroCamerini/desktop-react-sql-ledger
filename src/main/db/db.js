@@ -37,36 +37,77 @@ let _sessionUUID
  * };
  */
 function generateWhereClause(filters, prefix = "filter_") {
+  
   const clauses = []
   const params = {}
   for (const[field, condition] of Object.entries(filters)) {
     
-    if (condition.equals) {
+    const keys = Object.keys(condition)
+
+    if(keys.length != 1 ) {
+      throw new Error(`Filter for field ${field} has more than 1 condition`);
+    }
+
+    const filterName = keys[0]
+
+    switch (filterName) {
+      case 'equal':
+      case 'not_equal':
+      case 'greater_than':
+      case 'greater_than_e': 
+      case 'less_than':
+      case 'less_than_e':
+
+        const operators = {
+          equal: "=",
+          not_equal: '<>',
+          greater_than: '>',
+          greater_than_e: '>=',
+          less_than: '<',
+          less_than_e: '<='
+        }
         
-        clauses.push(`${field} = @${prefix}${field}`);
-        params[`${prefix}${field}`] = condition.equals;
-    
-    } else if (condition.in && Array.isArray(condition.in)) {
+        clauses.push(`(${field} ${operators[filterName]} @${prefix}${field}_value)`);
+        params[`${prefix}${field}_value`] = condition[filterName]
+      break;
+
+      case 'in':
+        if(!Array.isArray(condition.in)) {
+          throw new Error(`Error filtering ${field}, '${filterName}' requires an array of values`);
+        }
         const placeholders = condition.in.map((_, i) => `@${prefix}${field}_${i}`);
         clauses.push(`${field} IN (${placeholders.join(", ")})`);
-        condition.in.forEach((value, i) => {
-            params[`${prefix}${field}_${i}`] = value;
+        condition.in.forEach((valueIn, i) => {
+            params[`${prefix}${field}_${i}`] = valueIn;
         });
-    
-    } else if (condition.range && condition.range.from && condition.range.to) {
-        
-        clauses.push(`(${field} >= @${prefix}${field}_from AND ${field} <= @${prefix}${field}_to)`);
+      break;
+
+      case 'range':
+        if(!condition.range.from || !condition.range.to) {
+          throw new Error(`Error filtering ${field}, '${filterName}' requires 'from' and 'to' values`);
+        }
+        clauses.push(`(${field} BETWEEN @${prefix}${field}_from AND @${prefix}${field}_to)`);
         params[`${prefix}${field}_from`] = condition.range.from;
         params[`${prefix}${field}_to`] = condition.range.to;
-    } else if (condition.sign) {
+      break;
+
+      case 'sign':
+        if(condition.sign !== 'positive' && condition.sign !== 'negative') {
+          throw new Error(`Error filtering ${field}, '${filterName}' filter has two options 'positive' or 'negative'`);
+        }
         clauses.push(condition.sign === 'positive' ? `(${field} >= 0)` : `(${field} <= 0)`)
+      break;
+
+      default:
+        throw new Error(`Filter ${filterName} for field ${field} is invalid`);
+      break;
     }
   }
 
-  return {
+  return ({
     clause: clauses.length ? `WHERE ${clauses.join(" AND ")}` : "",
     params,
-  };
+  })
 
 }
 

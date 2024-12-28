@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ResponseToast from './ResponseToast';
 
 export default function InsertDataForm({tableName, editorForm}) {
 
@@ -9,12 +8,14 @@ export default function InsertDataForm({tableName, editorForm}) {
     window.api.insertData(tableName, data).then((res) => setResponse(res))
   } 
 
-  return (
-    <>
-    {
-      React.createElement(editorForm, {onSubmit: handleCreateFormSubmit })
-    }
-    <ResponseToast response={response} />
-    </>)
 
+  return React.createElement(
+      editorForm, 
+      {
+        onSubmit: handleCreateFormSubmit,
+        button: "Agregar",
+        response
+      }
+    )
+    
 }

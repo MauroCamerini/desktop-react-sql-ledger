@@ -13,13 +13,14 @@ const emptyValues = {
   amount: 0
 }
 
-export default function EntriesEditor({defaultValues = emptyValues, onSubmit}){
+export default function EntriesEditor({defaultValues, ...rest}){
   
   return (
     <Editor.Form 
-      onSubmit={onSubmit} 
-      defaultValues={defaultValues}
-      schema={EntriesEditorSchema}>
+      defaultValues={defaultValues || emptyValues}
+      schema={EntriesEditorSchema}
+      {...rest}
+      >
         
       <Editor.ListSelect
         label='Categoría'

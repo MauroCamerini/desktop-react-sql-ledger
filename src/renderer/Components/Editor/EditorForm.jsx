@@ -2,15 +2,23 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import ResponseToast from '../ResponseToast';
+
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
+import Stack from "react-bootstrap/Stack";
+
 import * as Yup from 'yup'
 
+
 export default function EditorForm({
-  onSubmit, button, children, 
+  onSubmit, 
+  button, 
+  response,
+  children, 
   schema = Yup.object().shape({}),
   defaultValues = {}
 }) {
@@ -43,7 +51,10 @@ export default function EditorForm({
       <Row className="mb-2">
         {renderChildren}
       </Row>
-      <Button variant="success" type="submit">{button || 'Enviar'}</Button>
+      <Stack direction="horizontal" gap={3} className="mb-3">
+        <Button type='submit'>{button || "Enviar"}</Button>
+        <ResponseToast response={response} />
+      </Stack>
     </Form>
   )
 }

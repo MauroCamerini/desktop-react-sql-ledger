@@ -16,7 +16,7 @@ export default function ResponseToast({response}) {
   return (<>
     <Toast 
       onClose={() => setShow(false)} 
-      show={show} delay={3000} 
+      show={show} delay={1000} 
       autohide
       bg={response.success ? 'success' : 'danger'}
       >

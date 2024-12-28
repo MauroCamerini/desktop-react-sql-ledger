@@ -26,7 +26,7 @@ Ensure the project directory structure matches the following:
 ## 4. Set up the entry point for the main process
 In the webpack.main.config.js file, specify the entry point for the Electron main process:
 ```javascript
-  entry: './src/main/main.js',
+  entry: './src/main/main.js'
 ```
 ## 5. Set up entry points for the renderer process
 In the forge.config.js file, configure the entry points for the renderer process
@@ -76,4 +76,11 @@ To use Bootstrap in the React app, import Bootstrap and its CSS in the src/rende
 // ./src/renderer/index.js
 import bootstrap from 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+```
+## 9. Add better-sqlite3 as an *external* module
+This fixes the error `Cannot find module 'undefinedbuild/Release/better_sqlite3.node'`. This module requires this because it has code in C++ an produces a binary part when it is compiled.
+```javascript
+  externals: {
+    'better-sqlite3': 'commonjs better-sqlite3',
+  }
 ```

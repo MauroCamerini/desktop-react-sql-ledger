@@ -13,10 +13,11 @@ const EntriesEditorSchema = Yup.object().shape({
     /^\d{4}-\d{2}$/,
     'El período debe estar en formato YYYY-MM'
     ),
-  amount: Yup.number("Debes ingresar un número")
+  amount: Yup.number()
     .transform((value, originalValue) => (originalValue === "" ? null : value))
     .nullable()
     .required('El monto es obligatorio.')
+    .typeError("Debes ingresar un número")
     .notOneOf([0], 'El monto no puede ser 0.'),
   tag_id: Yup.number()
     .transform((value, originalValue) => (originalValue === "" ? null : value))

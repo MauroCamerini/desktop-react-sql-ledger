@@ -118,7 +118,7 @@ function updateByID(tableName, id, data) {
       throw new Error(`${tableName} table is read only`)
     }
 
-    const info = db.updateRecord(tableName, data, {filters: {id: {equals: id}}})
+    const info = db.updateRecord(tableName, data, {filters: {id: {equal: id}}})
 
     triggers.tableUpdate(tableName, info, data)
 
@@ -142,7 +142,7 @@ function deleteByID(tableName, id) {
       throw new Error(`${tableName} table is read only`)
     }
 
-    const info = db.deleteRecord(tableName, {filters: {id: {equals: id}}})
+    const info = db.deleteRecord(tableName, {filters: {id: {equal: id}}})
 
     triggers.tableUpdate(tableName, info)
 

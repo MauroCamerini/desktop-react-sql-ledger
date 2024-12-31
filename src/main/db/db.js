@@ -22,7 +22,7 @@ let _sessionUUID
  *
  * @function
  * @param {Object} filters - Filters to apply, structured as key-value pairs:
- * - For equality: `fieldName: { equals: value } `
+ * - For comparison: `fieldName: { equal: value } `
  * - For multiple values: `fieldname: { in: [value1, value2, ...] }`
  * - For date ranges: `fieldname: { range: { from: Date, to: Date } }`
  * - For income or expenses: `fieldname: { sign: 'positive' || 'negative' }`
@@ -30,7 +30,7 @@ let _sessionUUID
  * 
  * @example  
  * const filters = {
- *   id: { equals: 255 },
+ *   id: { equal: 255 },
  *   tag_id: { in: [1, 2] },
  *   date: { from: '2023-01-01', to: '2023-12-31' }
  *   amount: { sign: 'postive}

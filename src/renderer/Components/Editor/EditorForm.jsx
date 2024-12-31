@@ -27,7 +27,7 @@ export default function EditorForm({
     defaultValues,
     resolver: yupResolver(schema)
   });
-  const { handleSubmit, register, formState: { errors, isSubmitted } } = methods
+  const { handleSubmit, register, formState: { errors, isSubmitted, isDirty } } = methods
 
   const renderChildren = React.Children.map(children, (child) => {
     return child.props.name ?
@@ -38,6 +38,7 @@ export default function EditorForm({
         {
           React.cloneElement(child, {
             ...register(child.props.name), 
+            methods,
             isInvalid: isSubmitted && !!errors[child.props.name]})
         }
         <Form.Control.Feedback type='invalid'>{errors[child.props.name]?.message}</Form.Control.Feedback>
@@ -52,7 +53,7 @@ export default function EditorForm({
         {renderChildren}
       </Row>
       <Stack direction="horizontal" gap={3} className="mb-3">
-        <Button type='submit'>{button || "Enviar"}</Button>
+        <Button type='submit' disabled={!isDirty}>{button || "Enviar"}</Button>
         <ResponseToast response={response} />
       </Stack>
     </Form>

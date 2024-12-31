@@ -8,6 +8,7 @@ export default function ResponseToast({response}) {
   useEffect(() => {
     
     setShow(!!response)
+    console.log(response)
 
   }, [response])
 

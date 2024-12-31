@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { usePaginatedData } from "../Hooks/usePaginatedData";
 import AccordionContainer from "./AccordionContainer";
 import DataPagination from "./DataPagination"
 import DataTable from "./DataTable";
+import UpdateDataModal from "./UpdateDataModal";
 
-export default function DataView({tableName, filtersForm, columns}) {
+export default function DataView({tableName, filtersForm, columns, ...rest}) {
   
   const {data, pagination, onFiltersChange} = usePaginatedData(tableName)
 
@@ -18,6 +19,7 @@ export default function DataView({tableName, filtersForm, columns}) {
       <DataTable 
         data={data}
         columns={columns}
+        {...rest}
       />
     }
     <DataPagination {...pagination} />

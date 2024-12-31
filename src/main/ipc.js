@@ -29,11 +29,11 @@ function setHandlers() {
 
   ipcMain.handle('api:update-by-id', 
     async (event, tableName, id, data) => 
-      api.getData(tableName, id, data));
+      api.updateByID(tableName, id, data));
 
   ipcMain.handle('api:delete-by-id', 
     async (event, tableName, id) => 
-      api.getData(tableName, id))
+      api.deleteByID(tableName, id))
 
   _handlersSet = true
 

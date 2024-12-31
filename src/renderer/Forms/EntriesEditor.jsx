@@ -4,20 +4,20 @@ import { getTagLabelWithDepth  } from "../Utils/utils";
 import { getNowYYYYMM, getNowYYYYMMDD } from "../../common/dateformat";
 import EntriesEditorSchema from "../Schema/EntriesEditorSchema";
 
-const emptyValues = {
-  tag_id: "",
-  wallet_id: "",
-  contact_id: '',
+export const emptyValues = Object.freeze({
+  tag_id: "1",
+  wallet_id: "1",
+  contact_id: "1",
   period: getNowYYYYMM(),
   date: getNowYYYYMMDD(),
   amount: 0
-}
+})
 
 export default function EntriesEditor({defaultValues, ...rest}){
   
   return (
     <Editor.Form 
-      defaultValues={defaultValues || emptyValues}
+      defaultValues={defaultValues || {...emptyValues}}
       schema={EntriesEditorSchema}
       {...rest}
       >

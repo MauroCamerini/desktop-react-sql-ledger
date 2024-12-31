@@ -4,7 +4,7 @@ export default function InsertDataForm({tableName, editorForm}) {
 
   const [response, setResponse] = useState()
 
-  const handleCreateFormSubmit = (data) => {
+  const handleFormSubmit = (data) => {
     window.api.insertData(tableName, data).then((res) => setResponse(res))
   } 
 
@@ -12,7 +12,7 @@ export default function InsertDataForm({tableName, editorForm}) {
   return React.createElement(
       editorForm, 
       {
-        onSubmit: handleCreateFormSubmit,
+        onSubmit: handleFormSubmit,
         button: "Agregar",
         response
       }

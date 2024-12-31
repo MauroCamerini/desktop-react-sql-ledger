@@ -45,7 +45,7 @@ Desktop React SQL Ledger is a portable desktop app to track income and expenses.
 - [Project Setup](/docs/projectsetup.md)
 
 ### Current Status
-The application enables users to add new entries through a validated form and view existing entries with filtering and pagination functionality. These features—forms, filtering, pagination, and data loading—are implemented using template components, making it relatively easy to add new features (e.g., editing another table). Key upcoming features include delete and update functionalities, exporting/importing to Excel, and dynamically generated queries for generating reports.
+The application enables users to add new entries through a validated form, view existing entries with filtering and pagination functionality, edit entries. These features—forms, filtering, pagination, and data loading—are implemented using *template* components, making it relatively easy to add new features (e.g., editing another table). Key upcoming features include delete and update functionalities, exporting/importing to Excel, and dynamically generated queries for generating reports.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for details.

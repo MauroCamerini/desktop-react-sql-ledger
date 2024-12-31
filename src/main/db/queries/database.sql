@@ -66,7 +66,7 @@ CREATE TABLE "entries" (
 
 	"tag_id"			INTEGER NOT NULL,	
 	"wallet_id"		INTEGER NOT NULL,
-	"contact_id"	INTEGER,
+	"contact_id"	INTEGER NOT NULL,
 	"group_id"		INTEGER,
 
 	"creation_time"  		TEXT DEFAULT (strftime('%Y-%m-%d %H:%M:%S:%s', 'now', 'localtime') ),
@@ -105,7 +105,7 @@ SELECT
 FROM entries e 
 INNER JOIN tags t ON t.id = e.tag_id
 INNER JOIN wallets w ON w.id = e.wallet_id
-LEFT  JOIN contacts c ON c.id = e.contact_id; -- contact_id can be NULL
+INNER JOIN contacts c ON c.id = e.contact_id; -- contact_id can be NULL
 
 CREATE VIEW "income_statement" (
 	period,

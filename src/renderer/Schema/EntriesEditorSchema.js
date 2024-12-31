@@ -31,9 +31,11 @@ const EntriesEditorSchema = Yup.object().shape({
     .integer().positive()
     ,
   contact_id: Yup.number()
-  .transform((value, originalValue) => (originalValue === "" ? null : value)) // Convierte "" en null
-  .nullable() // Permite valores nulos
-  .integer().positive(),
+  .transform((value, originalValue) => (originalValue === "" ? null : value))
+  .nullable()
+  .required('El contacto es obligatorio.')
+  .integer().positive()
+  ,
 })
 
 export default EntriesEditorSchema

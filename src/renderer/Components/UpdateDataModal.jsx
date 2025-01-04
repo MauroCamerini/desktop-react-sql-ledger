@@ -19,7 +19,7 @@ export default function UpdateDataModal({tableName, editorForm, dataRow, emptyVa
       return;
 
     const newDefaultValues = {}
-    Object.keys(emptyValues).forEach((key) => newDefaultValues[key] = dataRow[key])
+    Object.keys(emptyValues).forEach((key) => newDefaultValues[key] = dataRow[key] || '')
 
     console.log(newDefaultValues)
 
@@ -50,6 +50,7 @@ export default function UpdateDataModal({tableName, editorForm, dataRow, emptyVa
               defaultValues: defaultValues,
               onSubmit: handleFormSubmit,
               button: "Guardar",
+              dataRow
             }
           )
           : null

@@ -8,7 +8,7 @@ async function tableUpdate(tableName, info, data) {
     'tags': 'tag_list',
     'entries': 'period_list',
     'contacts': 'contact_list',
-    'wallet': 'wallet_list'
+    'wallets': 'wallet_list'
   }
   
   let listUpdate = !!lookup[tableName]

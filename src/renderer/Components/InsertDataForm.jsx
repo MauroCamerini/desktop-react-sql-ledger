@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { ApiContext } from '../Context/ApiContext';
 
 export default function InsertDataForm({tableName, editorForm}) {
 
-  const [response, setResponse] = useState()
+  const {setResponse} = useContext(ApiContext)
 
   const handleFormSubmit = (data) => {
     window.api.insertData(tableName, data).then((res) => setResponse(res))
@@ -14,7 +15,6 @@ export default function InsertDataForm({tableName, editorForm}) {
       {
         onSubmit: handleFormSubmit,
         button: "Agregar",
-        response
       }
     )
     

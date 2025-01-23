@@ -6,6 +6,7 @@ import LeftPanel from '../Components/Layout/LeftPanel';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import ResponseToast from '../Components/ResponseToast';
 
 export default function Layout() {
   return(<>
@@ -21,6 +22,7 @@ export default function Layout() {
         </Col>
       </Row>
     </Container>
+    <ResponseToast />
     </Container>
   </>)
 }

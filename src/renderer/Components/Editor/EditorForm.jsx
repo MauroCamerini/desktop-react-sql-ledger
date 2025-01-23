@@ -17,10 +17,8 @@
   rows, with up to three controls per row.
 
   The form includes a submit button, which is disabled until the form is m
-  odified (`isDirty`). It also renders a `ResponseToast` component to display 
-  the result of an API response. When the form is submitted, the `onSubmit` 
-  function provided as a prop is executed, receiving the form data as its 
-  argument.
+  odified (`isDirty`). When the form is submitted, the `onSubmit` function 
+  provided as a prop is executed, receiving the form data as its argument.
 
   The `EditorForm` ensures seamless integration of child components with React 
   Hook Form while maintaining a consistent layout and providing validation and
@@ -30,8 +28,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-
-import ResponseToast from '../ResponseToast';
 
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -48,8 +44,7 @@ import * as Yup from 'yup'
  *
  * @param {Object} props - The props for the component.
  * @param {function} props.onSubmit - The callback function to handle form submission. Receives the form data as an argument.
- * @param {string} [props.button="Enviar"] - The label for the submit button.
- * @param {Object} [props.response] - The response object returned from the API to display in the `ResponseToast` component.
+ * @param {string} [props.button="Enviar"] - The label for the submit button. component.
  * @param {React.ReactNode} props.children - The components to render as form fields.
  * @param {Yup.ObjectSchema} [props.schema=Yup.object().shape({})] - The Yup validation schema for the form.
  * @param {Object} [props.defaultValues={}] - The default values for the form fields.
@@ -58,7 +53,6 @@ import * as Yup from 'yup'
 export default function EditorForm({
   onSubmit, 
   button, 
-  response,
   children, 
   schema = Yup.object().shape({}),
   defaultValues = {}
@@ -95,7 +89,6 @@ export default function EditorForm({
       </Row>
       <Stack direction="horizontal" gap={3} className="mb-3">
         <Button type='submit' disabled={!isDirty}>{button || "Enviar"}</Button>
-        <ResponseToast response={response} />
       </Stack>
     </Form>
   )

@@ -56,7 +56,7 @@ export const useList = (listName, update = false) => {
 
     load()
 
-  }, [])
+  }, [listName])
 
   useEffect(() => {
 
@@ -70,7 +70,7 @@ export const useList = (listName, update = false) => {
       }
     }
 
-  }, [update])
+  }, [update, listName])
 
   return state;
 

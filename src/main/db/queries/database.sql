@@ -25,7 +25,7 @@ CREATE TABLE "wallets" (
 	"id"					INTEGER NOT NULL UNIQUE,
 	"name"							TEXT NOT NULL,
 	"description"				TEXT,
-	"starting_balance"	INTEGER NOT NULL DEFAULT 0,
+	"starting_balance"	NUMBER NOT NULL DEFAULT 0,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
 
@@ -138,18 +138,18 @@ GROUP BY
 --
 CREATE VIEW tag_list
 AS
-WITH RECURSIVE cte_hierarchy(id, parent_id, name, description, depth, path) AS (
+WITH RECURSIVE cte_hierarchy(id, parent_id, tag_type, name, description, depth, path) AS (
     -- Base case: Roots
-    SELECT id, parent_id, name, description, 0 AS depth, name AS path
+    SELECT id, parent_id, tag_type, name, description, 0 AS depth, name AS path
     FROM tags
     WHERE parent_id IS NULL
     UNION ALL
     -- Recursive case: Children
-    SELECT h.id, h.parent_id, h.name, h.description, cte.depth + 1, printf('%s/%s', cte.path, h.name) AS path
+    SELECT h.id, h.parent_id, h.tag_type, h.name, h.description, cte.depth + 1, printf('%s/%s', cte.path, h.name) AS path
     FROM tags h
     INNER JOIN cte_hierarchy cte ON h.parent_id = cte.id
 )
-SELECT id, parent_id, name, description, depth, path
+SELECT id, parent_id, tag_type, name, description, depth, path
 FROM cte_hierarchy
 ORDER BY path;
 

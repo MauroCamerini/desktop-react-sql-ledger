@@ -16,14 +16,9 @@ const options = {
   limit: 50, offset: 0
 }
 
-export default function Edit() {
+export default function EntriesAdd() {
 
   const {data} = useData('entries_view', options, true)
-
-  useEffect(() => {
-    console.log('mounting')
-    return (()=> console.log('unmounting'))
-  }, [])
 
   return (<>
     <h2>Agregar movimiento</h2>

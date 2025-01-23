@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import ResponseToast from './ResponseToast';
+import { ApiContext } from '../Context/ApiContext';
 
 export default function UpdateDataModal({tableName, editorForm, dataRow, emptyValues, onHide}) {
 
-  const [response, setResponse] = useState()
+  const { setResponse } = useContext(ApiContext)
   const [show, setShow] = useState(false);
   const [defaultValues, setDefaultValues] = useState()
   const [rowId, setRowId] = useState()
@@ -21,8 +21,6 @@ export default function UpdateDataModal({tableName, editorForm, dataRow, emptyVa
     const newDefaultValues = {}
     Object.keys(emptyValues).forEach((key) => newDefaultValues[key] = dataRow[key] || '')
 
-    console.log(newDefaultValues)
-
     setDefaultValues(newDefaultValues)
     setRowId(dataRow.id)
     setShow(true)
@@ -31,7 +29,6 @@ export default function UpdateDataModal({tableName, editorForm, dataRow, emptyVa
 
   return (
     <>
-    <ResponseToast response={response} />
     <Modal 
       show={show}
       backdrop="static"

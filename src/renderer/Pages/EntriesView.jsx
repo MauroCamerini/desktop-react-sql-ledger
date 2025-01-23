@@ -13,7 +13,7 @@ const columns=[
   { header: 'Contacto',   field: 'contact_name' },
 ]
 
-const Test = () => {
+const EntriesView = () => {
 
   const [dataRow, setDataRow] = useState()
 
@@ -36,4 +36,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default EntriesView;

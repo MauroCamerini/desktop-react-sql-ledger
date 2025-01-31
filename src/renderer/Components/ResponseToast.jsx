@@ -24,7 +24,7 @@ export default function ResponseToast() {
       show={show} delay={3000} 
       autohide
       >
-      <Toast.Body>{response.error ? response.error : `Datos guardados correctamente ID: ${response?.data?.lastInsertRowid}`}</Toast.Body>
+      <Toast.Body>{response.error ? response.error : `Datos modificados correctamente ID: ${response?.data?.lastInsertRowid}`}</Toast.Body>
     </Toast>
   </>)
 

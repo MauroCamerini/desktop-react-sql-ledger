@@ -108,26 +108,26 @@ INNER JOIN wallets w ON w.id = e.wallet_id
 INNER JOIN contacts c ON c.id = e.contact_id; -- contact_id can be NULL
 
 CREATE VIEW "income_statement" (
-	period,
-	c_fix, c_ord, c_ext, c_total,
-	d_fix, d_ord, d_ext, d_total,
-	result
+    period,
+    c_fix, c_ord, c_ext, c_total,
+    d_fix, d_ord, d_ext, d_total,
+    result
 )
 AS
 SELECT
-	period,
-	(SELECT IFNULL(SUM(amount), 0) FROM entries WHERE amount > 0 AND tag_type = 'FIX' AND period = e.period) AS c_fix,
-	(SELECT IFNULL(SUM(amount), 0) FROM entries WHERE amount > 0 AND tag_type = 'ORD' AND period = e.period) AS c_ord,
-	(SELECT IFNULL(SUM(amount), 0) FROM entries WHERE amount > 0 AND tag_type = 'EXT' AND period = e.period) AS c_ext,
-	(SELECT IFNULL(SUM(amount), 0) FROM entries WHERE amount > 0 AND period = e.period) AS c_total,	
-	(SELECT IFNULL(SUM(amount), 0) FROM entries WHERE amount < 0 AND tag_type = 'FIX' AND period = e.period) AS d_fix,
-	(SELECT IFNULL(SUM(amount), 0) FROM entries WHERE amount < 0 AND tag_type = 'ORD' AND period = e.period) AS d_ord,
-	(SELECT IFNULL(SUM(amount), 0) FROM entries WHERE amount < 0 AND tag_type = 'EXT' AND period = e.period) AS d_ext,
-	(SELECT IFNULL(SUM(amount), 0) FROM entries WHERE amount < 0 AND period = e.period ) AS d_total,
-	(SELECT IFNULL(SUM(amount), 0) FROM entries WHERE period = e.period AND period = e.period ) AS result
-FROM entries e
-GROUP BY
-	period;
+    period,
+    SUM(CASE WHEN amount > 0 AND tag_type = 'FIX' THEN amount ELSE 0 END) AS c_fix,
+    SUM(CASE WHEN amount > 0 AND tag_type = 'ORD' THEN amount ELSE 0 END) AS c_ord,
+    SUM(CASE WHEN amount > 0 AND tag_type = 'EXT' THEN amount ELSE 0 END) AS c_ext,
+    SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END) AS c_total,
+    SUM(CASE WHEN amount < 0 AND tag_type = 'FIX' THEN amount ELSE 0 END) AS d_fix,
+    SUM(CASE WHEN amount < 0 AND tag_type = 'ORD' THEN amount ELSE 0 END) AS d_ord,
+    SUM(CASE WHEN amount < 0 AND tag_type = 'EXT' THEN amount ELSE 0 END) AS d_ext,
+    SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END) AS d_total,
+    SUM(amount) AS result
+FROM entries_view
+GROUP BY period;
+
 
 -----------
 -- LISTS --

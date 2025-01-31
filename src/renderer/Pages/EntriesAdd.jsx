@@ -25,7 +25,7 @@ export default function EntriesAdd() {
     <InsertDataForm tableName='entries' editorForm={EntriesEditor} />
     { data && 
       <>
-      <h2>Creadas hoy:</h2>
+      <h3>Creadas hoy</h3>
       <DataTable 
         data={data}
         tableName='entries_view' 

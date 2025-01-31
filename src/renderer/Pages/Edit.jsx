@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 
 import TagsEditor, { emptyValues as tagsEmptyValues } from '../Forms/TagsEditor'
 import ContactsEditor, { emptyValues as contactsEmptyValues } from '../Forms/ContactsEditor'
@@ -10,6 +10,7 @@ import DataTable from '../Components/DataTable';
 
 import { useList } from '../Hooks/useList';
 import { useParams } from 'react-router';
+import { ApiContext } from '../Context/ApiContext';
  
 const pages = {
   'tags': {
@@ -40,6 +41,7 @@ const pages = {
     columns: [
       { header: 'Nombre',      field: 'name' },
       { header: 'Descripción', field: 'description' },
+      { header: 'Monto inicial', field: 'starting_balance' },
     ]
   }
 }
@@ -54,8 +56,10 @@ export default function Edit() {
 
   const [dataRow, setDataRow] = useState()
 
+  const {deleteTableRow} = useContext(ApiContext)
+
   return (<>
-    <h2>Nueva etiqueta</h2>
+    <h2>Crear</h2>
     <InsertDataForm tableName={tableName} editorForm={editorForm} />
     { items && 
       <>
@@ -65,12 +69,15 @@ export default function Edit() {
         emptyValues={emptyValues}
         dataRow={dataRow}
         onHide={() => setDataRow()}/>
+        
+      <h2>Editar</h2>
       <DataTable 
         data={items}
         tableName={tableName} 
         columns={columns}
         controls
         onUpdateClick={(newDataRow => setDataRow(newDataRow))}
+        onDeleteClick={(dr => deleteTableRow(tableName, dr))}
       />
       </>
     }
